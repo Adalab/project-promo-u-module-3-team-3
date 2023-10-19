@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
   font-family: 'Special Elite';
   background-color: #faf5e3;
@@ -68,17 +67,21 @@
     justify-content: center;
 
     .subHeader__h2 {
+      width: 280px;
       font-size: 20px;
-
       @media all and (min-width: 768px) {
+        justify-content: center;
+        width: 100vw;
         font-size: 40px;
       }
     }
 
     .subHeader__h2-p {
+      width: 280px;
+      text-align: center;
       font-size: 12px;
-
       @media all and (min-width: 768px) {
+        width: 100vw;
         font-size: 18px;
         margin-bottom: 15px;
         margin-top: 15px;
@@ -86,8 +89,10 @@
     }
 
     .btn-projects {
-      width: 116.4px;
-      height: 22px;
+      background-color: goldenrod;
+      padding:5px;
+      width: 120px;
+      height: 24px;
       text-align: center;
       border-radius: 40px;
       margin: 0 auto;
@@ -106,12 +111,13 @@
   .autor {
     display: flex;
     flex-direction: row-reverse;
-    width: 60vw;
+    width: 70vw;
     height: max-content;
     border-radius: 20px;
     justify-content: center;
     margin: 0 auto;
     align-items: flex-start;
+    justify-content: center;
     border: solid 5px white;
     padding: 15px;
     margin-bottom: 20px;
@@ -299,6 +305,7 @@
     border-radius: 20px;
 
     .btn {
+      background-color: whitesmoke;
       margin: 2px;
       padding: 2px;
       @media all and (min-width: 768px){
@@ -306,18 +313,70 @@
         height: 30px;
        }
     }
+    .btn:hover {
+      background-color: goldenrod; 
+    }
 
     .btn-large {
+      background: goldenrod;
       padding: 2px;
      @media all and (min-width: 768px){
       width: 200px;
       height: 30px;
      }
   }}
+  .btn-large:hover {
+    background-color: gold; 
+  }
 }
 
 .hidden {
   
   display: none;
+}
+
+.logo{
+    display: block;
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+    border-radius: 50px;
+    margin:5px;
+    @media all and (min-width: 768px) {
+      width: 120px;
+      height: 120px;
+      border-radius: 60px; }
+    }
+
+.btn-Return {
+    background-color: whitesmoke;
+    font-size: 10px;
+    width: auto;
+    height: auto;
+    position: absolute;
+    left:50px;
+    transform: translateX(-50%);
+    margin-top: 2px;
+    transition: background-color 0.3s;
+    padding:5px;
+    @media all and (min-width: 768px) {
+      background-color: whitesmoke;
+      position: absolute;
+      left:60px;
+      transform: translateX(-50%);
+      margin-top: 2px;
+      transition: background-color 0.3s;
+      padding:5px;}
+}
+.btn-Return:hover {
+  background-color: goldenrod; 
+}
+
+.header{
+  width: 100vw;
+  height: 150px;
+  @media all and (min-width: 768px) {
+    height: 180px;
+  }
 }
 

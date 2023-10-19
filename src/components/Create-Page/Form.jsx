@@ -6,6 +6,7 @@ const Form = ({ data, updateInput, updateCard, error }) => {
   const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
   const [linkUrl, setLinkUrl] = useState('');
   const [hidden, setHidden] = useState(true);
+  
   const handleCard = () => {
     if (data.name === '') {
       updateCard('El campo del nombre del proyecto es obligatorio');
