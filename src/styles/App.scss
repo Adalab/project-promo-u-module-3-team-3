@@ -380,3 +380,40 @@
   }
 }
 
+//landing
+
+
+body{
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../images/fondo3.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.landing{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(210px);
+  
+}
+
+.Logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 60%;
+}
+
+.btn-Start{
+  padding: 15px;
+  font-size: 18px;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.btn-Start:hover {
+  background-color: wheat;
+}
