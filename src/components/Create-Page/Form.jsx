@@ -1,4 +1,3 @@
-import React from 'react';
 import callToApi from '../../services/fetch';
 import { useState } from 'react';
 import GetAvatar from '../Create-Page/GetAvatar';
@@ -18,6 +17,7 @@ const Form = ({
   const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
   const [linkUrl, setLinkUrl] = useState('');
   const [hidden, setHidden] = useState(true);
+
   const handleCard = () => {
     if (data.name === '') {
       updateCard('El campo del nombre del proyecto es obligatorio');
@@ -39,8 +39,11 @@ const Form = ({
       updateCard('El campo del autor es obligatorio');
     } else if (data.job === '') {
       updateCard('El campo del trabajo es obligatorio');
-    } else {
-      updateCard('La tarjeta ha sido creada');
+    }else if (data.photo ===''|| data.image ===''){updateCard('Las imágenes son obligatorias. ')
+
+    }
+     else {
+      updateCard('La tarjeta ha sido creada:');
     }
     callToApi(data).then((response) => {
       setLinkUrl(response);
@@ -71,129 +74,132 @@ const Form = ({
     updateCard('');
     setHidden(true);
     localStorage.remove('storagedData', data);
+    updateAvatar(''); // Restablecer la imagen del proyecto a la imagen predeterminada
+    updateAvatarProfile(''); // Restablecer la imagen de perfil a la imagen predeterminada
   };
+  
 
   return (
-    <section className='form'>
-      <h2 className='title'>Información</h2>
+    <section className="form">
+      <h2 className="title">Información</h2>
 
-      <section className='ask-info'>
-        <p className='subtitle'>Cuéntanos sobre el proyecto</p>
-        <hr className='line' />
+      <section className="ask-info">
+        <p className="subtitle">Cuéntanos sobre el proyecto</p>
+        <hr className="line" />
       </section>
 
-      <fieldset className='project'>
+      <fieldset className="project">
         <input
-          className='input'
-          type='text'
-          placeholder='Nombre del proyecto'
-          name='name'
-          id='name'
+          className="input"
+          type="text"
+          placeholder="Nombre del proyecto"
+          name="name"
+          id="name"
           onChange={handleInput}
           value={data.name}
           required
         />
         <input
-          className='input'
-          type='text'
-          name='slogan'
-          id='slogan'
-          placeholder='Slogan'
+          className="input"
+          type="text"
+          name="slogan"
+          id="slogan"
+          placeholder="Slogan"
           onChange={handleInput}
           value={data.slogan}
           required
         />
         <input
-          className='input'
-          type='text'
-          name='repo'
-          id='repo'
-          placeholder='Repo'
+          className="input"
+          type="text"
+          name="repo"
+          id="repo"
+          placeholder="Repo"
           onChange={handleInput}
           value={data.repo}
           required
         />
         <input
-          className='input'
-          type='text'
-          placeholder='Demo'
-          name='demo'
-          id='demo'
+          className="input"
+          type="text"
+          placeholder="Demo"
+          name="demo"
+          id="demo"
           onChange={handleInput}
           value={data.demo}
           required
         />
         <input
-          className='input'
-          type='text'
-          placeholder='Tecnologías'
-          name='technologies'
-          id='technologies'
+          className="input"
+          type="text"
+          placeholder="Tecnologías"
+          name="technologies"
+          id="technologies"
           onChange={handleInput}
           value={data.technologies}
           required
         />
         <textarea
-          className='textarea'
-          type='text'
-          placeholder='Descripción'
-          name='desc'
-          id='desc'
+          className="textarea"
+          type="text"
+          placeholder="Descripción"
+          name="desc"
+          id="desc"
           onChange={handleInput}
           value={data.desc}
           required
         ></textarea>
       </fieldset>
 
-      <section className='ask-info'>
-        <p className='subtitle'>Cuéntanos sobre la autora</p>
-        <hr className='line' />
+      <section className="ask-info">
+        <p className="subtitle">Cuéntanos sobre la autora</p>
+        <hr className="line" />
       </section>
 
-      <fieldset className='autor__fielset'>
+      <fieldset className="autor__fielset">
         <input
-          className='input'
-          type='text'
-          placeholder='Nombre'
-          name='autor'
-          id='autor'
+          className="input"
+          type="text"
+          placeholder="Nombre"
+          name="autor"
+          id="autor"
           onChange={handleInput}
           value={data.autor}
           required
         />
         <input
-          className='input'
-          type='text'
-          placeholder='Trabajo'
-          name='job'
-          id='job'
+          className="input"
+          type="text"
+          placeholder="Trabajo"
+          name="job"
+          id="job"
           onChange={handleInput}
           value={data.job}
           required
         />
       </fieldset>
 
-      <section className='buttons-img'>
-        <button className='btn'>
+      <section className="buttons-img">
+        <button className="btn">
           <GetAvatar
             avatar={avatar}
             update={updateAvatar}
-            text='Subir imagen del proyecto'
+            text="Subir imagen del proyecto"
           />
         </button>
-        <button className='btn'>
+        <button className="btn">
           <GetAvatar
             update={updateAvatarProfile}
             avatarProfile={avatarProfile}
-            text='Subir tu foto personal'
+            text="Subir tu foto personal"
           />
         </button>
       </section>
-      <section className='buttons-img'>
-        <button onClick={handleCard} className='btn-large'>
+      <section className="buttons-img">
+        <button onClick={handleCard} className="btn-large">
           Crear Tarjeta
         </button>
-        <button onClick={handleReset} className='btn-large'>
+        <button onClick={handleReset} className="btn-large">
           Reset
         </button>
 
@@ -201,8 +207,7 @@ const Form = ({
       </section>
 
       <section className={`card ${hidden ? 'hidden' : ''}`}>
-        
-        <a href={linkUrl} className='' target='_blank' rel='noreferrer'>
+        <a href={linkUrl} className="" target="_blank" rel="noreferrer">
           {linkUrl}
         </a>
       </section>
