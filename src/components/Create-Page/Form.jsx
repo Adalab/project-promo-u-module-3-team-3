@@ -1,5 +1,5 @@
 import callToApi from '../../services/fetch';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GetAvatar from '../Create-Page/GetAvatar';
 import localStorage from '../../services/localStorage';
 import { set } from 'immutable';
@@ -13,10 +13,23 @@ const Form = ({
   updateAvatar,
   updateAvatarProfile,
   avatarProfile,
+  updatedData
 }) => {
+
   const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
   const [linkUrl, setLinkUrl] = useState('');
   const [hidden, setHidden] = useState(true);
+  // useEffect(() => {
+  //   const storedData = localStorage.get('storagedData');
+  //   if (storedData) {
+  //     if (storedData.photo) {
+  //       updateAvatar(storedData.photo);
+  //     }
+  //     if (storedData.image) {
+  //       updateAvatarProfile(storedData.image);
+  //     }
+  //   }
+  // }, [updateAvatar, updateAvatarProfile]);
 
   const handleCard = () => {
     if (data.name === '') {
@@ -39,7 +52,7 @@ const Form = ({
       updateCard('El campo del autor es obligatorio');
     } else if (data.job === '') {
       updateCard('El campo del trabajo es obligatorio');
-    }else if (data.photo ===''|| data.image ===''){updateCard('Las imágenes son obligatorias. ')
+    }else if (data.photo ===''&& data.image ===''){updateCard('Las imágenes son obligatorias. ')
 
     }
      else {
@@ -73,9 +86,11 @@ const Form = ({
     updateInput(emptyData);
     updateCard('');
     setHidden(true);
+    const updatedData = { ...data, photo: '', image: '' };
+    localStorage.set('storagedData', updatedData);
     localStorage.remove('storagedData', data);
-    updateAvatar(''); // Restablecer la imagen del proyecto a la imagen predeterminada
-    updateAvatarProfile(''); // Restablecer la imagen de perfil a la imagen predeterminada
+    updateAvatar(''); 
+    updateAvatarProfile(''); 
   };
   
 

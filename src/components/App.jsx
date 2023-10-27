@@ -25,6 +25,7 @@ function App() {
   );
   const updateInput = (data) => {
     setData(data);
+    
   };
 
   const updateCard = (error) => {
@@ -35,12 +36,17 @@ function App() {
   const updateAvatar = (avatar) => {
     setAvatar(avatar);
     setData((prevData) => ({ ...prevData, photo: avatar }));
+    const updatedData = { ...data, photo: avatar };
+    localStorage.set('storagedData', updatedData);
+    
   };
 
   const [avatarProfile, setAvatarProfile] = useState('');
   const updateAvatarProfile = (avatarProfile) => {
     setAvatarProfile(avatarProfile);
     setData((prevData) => ({ ...prevData, image: avatarProfile }));
+    const updatedData = { ...data, image: avatarProfile };
+    localStorage.set('storagedData', updatedData);
   };
 
   const { pathname } = useLocation();
