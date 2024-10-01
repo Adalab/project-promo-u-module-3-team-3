@@ -7,14 +7,15 @@ app.use(cors());
 app.use(express.json());
 app.set('view engine', 'ejs');
 
+
 const port = 3000;
 
 async function getConnection() {
   const connection = await mysql.createConnection({
     host: 'sql.freedb.tech',
-    user: 'freedb_reactiveDetectives',
-    password: 'SVDJ$*k973B?AtX',
-    database: 'freedb_ProyectosMolones',
+    user: 'freedb_Barbara',
+    password: 'Dy#P4S?VY8&k2MP',
+    database: 'freedb_molones',
   });
 
   connection.connect();
@@ -44,18 +45,27 @@ app.get('/newCard/:idprojects', async (req, res) => {
   const id = req.params.idprojects;
   const selectProject =
     'SELECT * FROM projects INNER JOIN users ON users.idusers = projects.fk_idusers WHERE idprojects = ?';
-  const conn = await getConnection();
-  const [results] = await conn.query(selectProject, [id]);
-  if (results.length === 0) {
-    res.render('notFound');
-  } else {
-    res.render('detailCard', {
-      project: results[0],
-    });
+
+  try {
+    const conn = await getConnection(); 
+    const [results] = await conn.query(selectProject, [id]); 
+
+    if (results.length === 0) {
+      res.render('notFound'); 
+    } else {
+      res.render('detailCard', {
+        project: results[0], 
+      });
+    }
+
+    console.log(results[0]); 
+    conn.end(); 
+  } catch (error) {
+    console.error('Error al obtener el proyecto:', error);
+    res.status(500).json({ error: 'Error al obtener el proyecto.' }); 
   }
-  console.log(results[0]);
-  conn.end();
 });
+
 
 app.post('/newCard', async (req, res) => {
   const newCard = req.body;
@@ -79,7 +89,7 @@ app.post('/newCard', async (req, res) => {
   const [resultsInsert] = await conn.query(sqlProject, valuesProject);
   let response = {
     success: true,
-    cardURL: `http://localhost:3000/newCard/${resultsInsert.insertId}`,
+    cardURL: `https://reactives-detectives.onrender.com/newCard/${resultsInsert.insertId}`,
   };
   res.json(response);
   conn.end();
@@ -104,7 +114,7 @@ app.delete('/deleteProject/:id', async (req, res) => {
   }
 });
 
-const staticServerPathWeb = './web/dist/';
+const staticServerPathWeb = './src/public-react';
 app.use(express.static(staticServerPathWeb));
 
 const staticServerCSS = './src/public-css';
