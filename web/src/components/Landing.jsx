@@ -28,7 +28,6 @@ function Landing() {
       console.log('Delete Result:', deleteResult);
 
       const updatedList = await api.getDataProjects();
-
       setListProject(updatedList);
     } catch (error) {
       console.error(error);
@@ -59,13 +58,15 @@ function Landing() {
               >
                 <i className="fa-solid fa-trash fa-beat-fade fa-lg"></i>
               </button>
-              <a href={`https://reactives-detectives.onrender.com/newCard/${project.idprojects}`}>
+              <div
+                onClick={() => window.open(`http://localhost:3000/${project.idprojects}`, '_blank')}
+                style={{ cursor: 'pointer' }}
+              >
                 <CardData
-                  key={project.idprojects}
                   data={project}
                   className='landing_card'
                 />
-              </a>
+              </div>
             </div>
           ))}
         </section>

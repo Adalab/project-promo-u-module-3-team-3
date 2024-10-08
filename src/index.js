@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
+const dotenv = require('dotenv');
+
+
 
 const app = express();
 app.use(cors());
@@ -10,18 +13,24 @@ app.set('view engine', 'ejs');
 
 const port = 3000;
 
+dotenv.config();
+
 async function getConnection() {
   const connection = await mysql.createConnection({
-    host: 'sql.freedb.tech',
-    user: 'freedb_reactiveDetectives',
-    password: 'SVDJ$*k973B?AtX',
-    database: 'freedb_ProyectosMolones',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
   });
 
-  connection.connect();
   return connection;
 }
 
+getConnection().then(() => {
+  console.log('Conectado a la base de datos');
+}).catch(err => {
+  console.error('Error al conectar a la base de datos:', err);
+});
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
@@ -80,7 +89,7 @@ app.post('/newCard', async (req, res) => {
   const [resultsInsert] = await conn.query(sqlProject, valuesProject);
   let response = {
     success: true,
-    cardURL: `https://reactives-detectives.onrender.com/newCard/${resultsInsert.insertId}`,
+    cardURL: `http://localhost:3000/newCard/${resultsInsert.insertId}`,
   };
   res.json(response);
   conn.end();
