@@ -59,7 +59,7 @@ function Landing() {
                 <i className="fa-solid fa-trash fa-beat-fade fa-lg"></i>
               </button>
               <div
-                onClick={() => window.open(`http://localhost:3000/${project.idprojects}`, '_blank')}
+                onClick={() => window.open(`https://cards-maker.onrender.com/${project.idprojects}`, '_blank')}
                 style={{ cursor: 'pointer' }}
               >
                 <CardData
